@@ -197,7 +197,7 @@ Under the hood it writes `~/.config/meetloaf/config.json` (or `$XDG_CONFIG_HOME/
     "presentTab": "Cmd+Shift+P",
     "leave": { "accelerator": "Cmd+W", "global": false }
   },
-  "window": { "width": 1200, "height": 800, "popOutPresentation": true, "presentBrowserTab": true, "hideDock": false }
+  "window": { "width": 1200, "height": 800, "popOutPresentation": true, "presentBrowserTab": true, "hideDock": false, "meetDarkTheme": true }
 }
 ```
 
@@ -212,6 +212,12 @@ Hand-edits use [Electron's accelerator syntax](https://www.electronjs.org/docs/l
 ### Hide the Dock icon (macOS)
 
 MeetLoaf can run as a menu-bar app with no Dock tile. Turn it on in **Settings → Window → Hide Dock icon**, or set `"window": { "hideDock": true }`. It takes effect immediately and no restart is needed. With the Dock icon gone there's no app menu bar either, so the window comes back from the menu-bar icon (left-click toggles it, right-click for the menu), the **Show / hide MeetLoaf** shortcut, or any Meet link routed to the app. Keyboard shortcuts keep working, including `⌘,` for Settings and `⌘Q` to quit. The Dock icon stays if the menu-bar icon can't be created, since there'd otherwise be no way back to a hidden window.
+
+### Match system dark mode in Meet
+
+Meet's home page and pre-join screen only come in light. Google ships no dark theme for Meet on the web, and the page ignores the OS setting even though MeetLoaf passes it through. So when your system is in dark mode, MeetLoaf turns on Chromium's own auto dark mode for the Meet window — the engine behind Chrome's "Auto Dark Mode for Web Contents" flag. It darkens light backgrounds and lightens dark text at paint time, and leaves images, video and Meet's already-dark in-call UI as they are. Nothing is injected into the page. It follows the OS live: switch your system theme and the page switches with it, no reload. Nothing changes for light-mode users.
+
+On by default. Turn it off in **Settings → Window → Match system dark mode in Meet**, or set `"window": { "meetDarkTheme": false }`. MeetLoaf's own windows (Settings, the welcome tour, the screen picker) follow the OS theme regardless.
 
 ### Presentation pop-out
 
